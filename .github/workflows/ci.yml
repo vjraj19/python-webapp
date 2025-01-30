@@ -22,6 +22,9 @@ jobs:
       - name: Build Docker image
         run: docker build -t flask-app .
 
+      - name: Build test container
+        run: docker build -t test-container -f test-container.Dockerfile .
+
       - name: Run Flask container
         run: docker run -d -p 8080:8080 --name flask-container flask-app
 
@@ -29,10 +32,10 @@ jobs:
         run: sleep 5
 
       - name: Run unit tests
-        run: docker exec -it flask-container /bin/sh
+        run: docker run -v $(pwd):/opt test-container
 
       - name: Test application response
         run: curl --fail http://localhost:8080
 
-      - name: Stop and remove container
-        run: docker stop flask-container && docker rm flask-container
+      - name: Stop and remove containers
+        run: docker stop flask-container && docker rm flask-container && docker stop test-container && docker rm test-container
