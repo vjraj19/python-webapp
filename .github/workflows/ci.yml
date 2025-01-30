@@ -29,7 +29,7 @@ jobs:
         run: sleep 5
 
       - name: Run unit tests
-        run: docker exec -it flask-container python /opt/test_app.py
+        run: docker exec -it flask-container /bin/sh
 
       - name: Test application response
         run: curl --fail http://localhost:8080
