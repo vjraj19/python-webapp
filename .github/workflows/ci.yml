@@ -27,21 +27,10 @@ jobs:
           pip install pytest pytest-html
           pip install -r requirements.txt
 
-      - name: Run unit tests and generate report
-        run: pytest --junitxml=report.xml --html=report.html --self-contained-html
+      - name: Run unit tests 
+        run: python -m unittest discover -s . -p "*_test.py
         
-        name: Upload Test Report (XML)
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: report.xml
-
-      - name: Upload HTML Test Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: html-test-report
-          path: report.html
-
+        
   docker-build:
     runs-on: ubuntu-latest
     needs: test  # Ensures tests pass before building
