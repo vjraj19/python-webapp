@@ -32,7 +32,7 @@ jobs:
           python -m xmlrunner discover -s . -p "test_app.py" -o test-reports
 
       - name: Upload Test Report (XML)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: test-reports
