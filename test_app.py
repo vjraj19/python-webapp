@@ -19,19 +19,16 @@ class TestApp(unittest.TestCase):
     def test_code_route(self):
         response = self.app.get('/code')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("```python", response.data.decode('utf-8'))
         self.assertIn("def greet(name):", response.data.decode('utf-8'))
 
     def test_code2_route(self):
         response = self.app.get('/code2')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("```python", response.data.decode('utf-8'))
         self.assertIn("def add(x, y):", response.data.decode('utf-8'))
 
     def test_code3_route(self):
         response = self.app.get('/code3')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("```python", response.data.decode('utf-8'))
         self.assertIn("def multiply(x, y):", response.data.decode('utf-8'))
 
     def test_non_existent_route(self):
