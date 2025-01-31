@@ -1,4 +1,4 @@
-name: Flask CI
+name: Flask CI/CD Workflow
 
 on:
   push:
@@ -48,7 +48,10 @@ jobs:
       - name: Build Docker image
         run: docker build -t flask-app .
 
-      - name: Run container and test its
+      - name: Save Docker image as an artifact
+        run: docker save flask-app | gzip > flask-app.tar.gz
+
+      - name: Run container and test it
         run: |
           docker run -d -p 8080:8080 --name flask-container flask-app
           sleep 5  # Wait for Flask to start
