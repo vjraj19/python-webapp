@@ -71,7 +71,11 @@ jobs:
       - name: Download Docker image artifact
         uses: actions/download-artifact@v4
         with:
-          name: test-report
+          name: flask-app  # ✅ Correct artifact name
+          path: .
+
+      - name: Verify Artifact Exists
+        run: ls -l  # ✅ List files to check if flask-app.tar.gz is present
 
       - name: Set up SSH connection
         run: |
@@ -91,3 +95,4 @@ jobs:
             docker rm flask-container || true
             docker load < /home/ubuntu/flask-app.tar.gz
             docker run -d -p 8080:8080 --name flask-container flask-app
+          EOF
