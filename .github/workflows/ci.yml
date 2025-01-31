@@ -58,7 +58,7 @@ jobs:
       - name: Stop and remove container
         run: docker stop flask-container && docker rm flask-container
 
-   deploy:
+  deploy:
     runs-on: ubuntu-latest
     needs: docker-build
     steps:
