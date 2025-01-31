@@ -27,15 +27,10 @@ jobs:
           pip install pytest pytest-html unittest-xml-reporting
           pip install -r requirements.txt
 
-      - name: Run unit tests and generate report
-        run: |
-          python -m xmlrunner discover -s . -p "test_app.py" -o test-reports
+      - name: Run unit tests 
+        run: python -m unittest discover -s . -p "test_app.py"
 
-      - name: Upload Test Report (XML)
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-report
-          path: test-reports
+      
           
   docker-build:
     runs-on: ubuntu-latest
@@ -49,7 +44,7 @@ jobs:
         run: docker build -t flask-app .
 
       - name: Save Docker image as an artifact
-        run: docker save test-report | gzip > flask-app.tar.gz
+        run: docker save flask-app | gzip > flask-app.tar.gz
 
       - name: Run container and test it
         run: |
