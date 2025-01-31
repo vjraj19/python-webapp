@@ -47,7 +47,7 @@ jobs:
         run: docker save flask-app | gzip > flask-app.tar.gz
 
       - name: Upload docker image artifact
-        run: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
 
       - name: Run container and test it
         run: |
