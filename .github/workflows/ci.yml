@@ -48,7 +48,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t flask-app .
 
-      - name: Run container and test it
+      - name: Run container and test its
         run: |
           docker run -d -p 8080:8080 --name flask-container flask-app
           sleep 5  # Wait for Flask to start
