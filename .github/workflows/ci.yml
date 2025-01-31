@@ -49,7 +49,7 @@ jobs:
         run: docker build -t flask-app .
 
       - name: Save Docker image as an artifact
-        run: docker save flask-app | gzip > flask-app.tar.gz
+        run: docker save test-report | gzip > flask-app.tar.gz
 
       - name: Run container and test it
         run: |
@@ -71,8 +71,8 @@ jobs:
       - name: Download Docker image artifact
         uses: actions/download-artifact@v4
         with:
-          name: flask-app  # ✅ Correct artifact name
-          path: .
+          name: test-report # ✅ Correct artifact name
+         
 
       - name: Verify Artifact Exists
         run: ls -l  # ✅ List files to check if flask-app.tar.gz is present
